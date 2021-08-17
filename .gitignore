@@ -1,0 +1,17 @@
+.coverage
+.Python
+*.egg-info
+*.log
+*.mo
+*.py?
+*.swp
+# dirs
+# files
+# excludes
+!.coveragerc
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.gitkeep
+!.travis.yml
+.DS_Store
