@@ -8,6 +8,9 @@ Changelog
 - Add .gitignore
   [enfold-josh]
 
+- Track LDAP, elasticsearch, and redis requests.
+  [enfold-josh]
+
 
 1.0.2 (2015-12-01)
 ------------------

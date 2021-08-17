@@ -73,6 +73,21 @@ def pubSucessHandler(ev):
     rss1 = stats['memory'][0] / 1024
     rss2 = process.memory_info()[0] / 1024
 
+    ldap_requests = len(stats['ldap-requests'])
+    ldap_requests_time = timedelta()
+    for td in stats['ldap-requests']:
+        ldap_requests_time += td
+
+    elasticsearch_requests = len(stats['elasticsearch-requests'])
+    elasticsearch_requests_time = timedelta()
+    for td in stats['elasticsearch-requests']:
+        elasticsearch_requests_time += td
+
+    redis_requests = len(stats['redis-requests'])
+    redis_requests_time = timedelta()
+    for td in stats['redis-requests']:
+        redis_requests_time += td
+
     info = (
         printTD(stats['time-end']),
         printTD(stats['time-after-traverse']),
@@ -88,14 +103,23 @@ def pubSucessHandler(ev):
         printTD(t_cached),
         printTD(t_uncached),
         rss1,
-        rss2
+        rss2,
+        ldap_requests,
+        printTD(ldap_requests_time),
+        elasticsearch_requests,
+        printTD(elasticsearch_requests_time),
+        redis_requests,
+        printTD(redis_requests_time),
     )
 
     if os.getenv("COLLECTIVE_STATS_DISABLE_LOG") != "1":
         logger.info(
             '| %s %s %s %s %s %0.4d %0.4d %0.4d '
             '| %s:%s | t: %s, t_c: %s, t_nc: %s '
-            '| RSS: %s - %s' % info
+            '| RSS: %s - %s '
+            '| %s %s '
+            '| %s %s ' 
+            '| %s %s' % info
         )
 
     ev.request.response.setHeader(

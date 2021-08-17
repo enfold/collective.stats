@@ -19,6 +19,21 @@ def initialize(context):
     except ImportError:
         pass
 
+    try:
+        import collective.stats.ldapstats
+    except ImportError:
+        pass
+
+    try:
+        import collective.stats.elasticsearchstats
+    except ImportError:
+        pass
+
+    try:
+        import collective.stats.redisstats
+    except ImportError:
+        pass
+
 
 process = psutil.Process(os.getpid())
 zero = timedelta(0)
@@ -37,6 +52,9 @@ def init_stats():
         'zodb-loads': [],
         'zodb-cached': [],
         'zodb-uncached': [],
+        'ldap-requests': [],
+        'elasticsearch-requests': [],
+        'redis-requests': [],
     })
 
 STATS = threading.local()
