@@ -117,13 +117,14 @@ def pubSucessHandler(ev):
             '| %s %s %s %s %s %0.4d %0.4d %0.4d '
             '| %s:%s | t: %s, t_c: %s, t_nc: %s '
             '| RSS: %s - %s '
-            '| %s %s '
-            '| %s %s ' 
-            '| %s %s' % info
+            '| %0.4d %s '
+            '| %0.4d %s ' 
+            '| %0.4d %s' % info
         )
 
+    header_values = info[:8] + info[15:]
     ev.request.response.setHeader(
-        'x-stats', '%s %s %s %s %s %0.4d %0.4d %0.4d' % info[:8]
+        'x-stats', '%s %s %s %s %s %0.4d %0.4d %0.4d %0.4d %s %0.4d %s %0.4d %s' % header_values
     )
 
     del STATS.stats
